@@ -17,7 +17,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 
 package Config::Model::Backend::Augeas ;
-use Any::Moose ;
+use Mouse ;
 use Carp ;
 use Log::Log4perl qw(get_logger :levels);
  

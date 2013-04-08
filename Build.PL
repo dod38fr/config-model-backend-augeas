@@ -38,7 +38,7 @@ my $build = Module::Build->new
 		      'Exception::Class'  => 0,
 		      'Config::Augeas'    => '0.303',
 		      'Config::Model'     => '1.255',
-		      'Any::Moose'        => 0,
+		      'Mouse'             => 0,
 
 		     },
    build_requires => {
