@@ -15,15 +15,14 @@ Augeas purpose is not to validate the semantic content of the
 configuration file.
 
 On the other side, Config::Model is able to validate the semantic
-content of the configuration file, but it will discard all comments
-and will write back configuration data using a canonical order. Thus
-the comments and structure of the original configuration file is not
-preserved.
+content of the configuration file, but it may discard all comments and
+will write back configuration data using a canonical order. Thus the
+structure of the original configuration file is not preserved.
 
 You can now have the best of both worlds by using the Augeas library
 to load and write data from Config::Model configuration tree. You can
 now instruct Config::Model to use Augeas backend in the autoread and
-autowrite feature. See Config::Model::Autoread for details.
+autowrite feature. See Config::Model::BackendMgr for details.
 
 Unfortunately, you must ensure that the tree representation specified
 in Config::Model and Augeas lens are quite close together:
@@ -54,7 +53,7 @@ set either environment variables to "C" locale:
 
 ----------------------------------------------------------------------
 
-    Copyright (c) 2008-2009 Dominique Dumont.
+    Copyright (c) 2008-2013 Dominique Dumont.
 
     This file is part of Config-Model-Backend-Augeas.
 
