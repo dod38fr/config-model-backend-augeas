@@ -1,3 +1,10 @@
+2013-04-20  Dominique Dumont  <domi.dumont@free.fr> v0.113
+
+    * removed Any::Moose in favor of Mouse (depends on Mouse now)
+    * Depends on Config::Model 2.034 (HEAD, master)
+    * added meta-model snippet so config-model-edit can handle
+      Augeas backend
+
 2012-07-09  Dominique Dumont  <domi.dumont@free.fr> v0.112
 
     * tests: Fixe broken test by changing the way the tests retrieve 
