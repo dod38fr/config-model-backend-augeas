@@ -52,4 +52,5 @@ my $build = Module::Build->new
    add_to_cleanup => [qw/wr_root r_root/],
   );
 
+$build->add_build_element('pl');
 $build->create_build_script;
