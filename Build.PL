@@ -24,8 +24,7 @@ use strict ;
 
 require 5.008;
 
-print "Note: Augeas integration tests require Config::Augeas ",
-  "and Augeas library > 0.3.3\n\n";
+print "Note: Augeas integration tests require Augeas library > 0.3.3\n\n";
 
 my $build = Module::Build->new
   (
