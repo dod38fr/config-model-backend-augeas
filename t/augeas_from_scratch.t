@@ -7,7 +7,6 @@ use Test::More ;
 use Config::Model;
 use File::Path;
 use File::Copy ;
-use Data::Dumper ;
 use version 0.77 ;
 
 use warnings;

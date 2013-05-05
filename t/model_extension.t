@@ -17,11 +17,6 @@ use Test::More ;
 
 
 use ExtUtils::testlib;
-use Log::Log4perl qw(:easy) ;
-use File::Path ;
-use File::Copy ;
-use File::Find ;
-use Test::File::Contents ;
 use Log::Log4perl qw(:easy :levels) ;
 use Config::Model ;
 
