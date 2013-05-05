@@ -1,3 +1,7 @@
+2013-05-05  Dominique Dumont  <domi.dumont@free.fr> v0.114
+
+    * removed from test unused 'use' statement that tripped smoke tests
+
 2013-04-20  Dominique Dumont  <domi.dumont@free.fr> v0.113
 
     * removed Any::Moose in favor of Mouse (depends on Mouse now)
