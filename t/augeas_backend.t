@@ -10,6 +10,7 @@ if (not defined $ENV{LC_ALL} or $ENV{LC_ALL} ne 'C' or $ENV{LANG} ne 'C') {
 
 use ExtUtils::testlib;
 use Test::More ;
+use Test::Differences;
 use Config::Model;
 use File::Path;
 use File::Copy ;
@@ -165,10 +166,12 @@ $ssh_augeas_obj->print('/files/etc/ssh/sshd_config/*') if $trace;
 #my @aug_content = $ssh_augeas_obj->match("/files/etc/ssh/sshd_config/*") ;
 #print join("\n",@aug_content) ;
 
-$expect = qq(AcceptEnv=LC_PAPER,LC_NAME,LC_ADDRESS,LC_TELEPHONE,LC_MEASUREMENT,LC_IDENTIFICATION,LC_ALL
-AllowUsers=foo,"bar\@192.168.0.*"
+my $assign = $Config::Model::VERSION >= 2.052 ? ':=' : ':' ;
+
+$expect = qq(AcceptEnv${assign}LC_PAPER,LC_NAME,LC_ADDRESS,LC_TELEPHONE,LC_MEASUREMENT,LC_IDENTIFICATION,LC_ALL
+AllowUsers${assign}foo,"bar\@192.168.0.*"
 HostbasedAuthentication=no
-HostKey=/etc/ssh/ssh_host_key,/etc/ssh/ssh_host_rsa_key,/etc/ssh/ssh_host_dsa_key
+HostKey${assign}/etc/ssh/ssh_host_key,/etc/ssh/ssh_host_rsa_key,/etc/ssh/ssh_host_dsa_key
 Subsystem:rftp=/usr/lib/openssh/rftp-server
 Subsystem:sftp=/usr/lib/openssh/sftp-server
 Subsystem:tftp=/usr/lib/openssh/tftp-server
@@ -195,7 +198,7 @@ Ciphers=arcfour256,aes192-cbc,aes192-ctr,aes256-cbc,aes256-ctr -
 
 $dump = $sshd_root->dump_tree ;
 print $dump if $trace ;
-is( $dump , $expect,"check dump of augeas data");
+eq_or_diff(  [ split /\n/, $dump ] , [ split /\n/, $expect ] ,"check dump of augeas data");
 
 # change data content, '~' is like a splice, 'record~0' like a "shift"
 $sshd_root->load("HostbasedAuthentication=yes 
