@@ -1,3 +1,7 @@
+2014-04-03  Dominique Dumont  <domi.dumont@free.fr> v0.116
+
+    * Added missing build require on Test::Differences
+
 2014-04-03  Dominique Dumont  <domi.dumont@free.fr> v0.115
 
     * tweak test to be compatible with Config::Model < and >= 2.052
