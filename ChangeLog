@@ -1,3 +1,7 @@
+2014-04-03  Dominique Dumont  <domi.dumont@free.fr> v0.115
+
+    * tweak test to be compatible with Config::Model < and >= 2.052
+
 2013-05-05  Dominique Dumont  <domi.dumont@free.fr> v0.114
 
     * removed from test unused 'use' statement that tripped smoke tests
