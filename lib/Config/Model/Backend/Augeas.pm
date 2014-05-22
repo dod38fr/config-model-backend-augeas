@@ -448,7 +448,6 @@ sub copy_in_augeas {
     # https://fedorahosted.org/augeas/ticket/24
 
     my @scan_args = (
-		     experience            => 'master',
 		     fallback              => 'all',
 		     auto_vivify           => 0,
 		     list_element_cb       => \&list_element_cb,

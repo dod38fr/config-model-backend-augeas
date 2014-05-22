@@ -118,7 +118,6 @@ $model->create_config_class
 	       },
 	       'Ciphers',
 	       {
-		'experience' => 'master',
 		'upstream_default_list' => [
 					    'aes256-cbc',
 					    'aes256-ctr',
