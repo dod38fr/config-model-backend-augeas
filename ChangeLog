@@ -1,6 +1,7 @@
-2014-05-24  Dominique Dumont  <domi.dumont@free.fr> v0.117
+2014-06-19  Dominique Dumont  <domi.dumont@free.fr> v0.117
 
     * experience config attribute is deprecated
+     (Closes Debian #750339)
 
 2014-04-03  Dominique Dumont  <domi.dumont@free.fr> v0.116
 
