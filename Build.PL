@@ -32,6 +32,7 @@ my $build = Module::Build->new
    license        => 'LGPL_2_1',
    dist_abstract  => 'Read and write configuration data through Augeas',
    dist_author    => 'Dominique Dumont (ddumont at cpan dot org)',
+   configure_requires => { 'Module::Build' => '0.36' },
    requires       => {
 		      'Log::Log4perl'     => '1.11', # for TRACE log level
 		      'Exception::Class'  => 0,
