@@ -273,7 +273,7 @@ sub read {
         my $v     = $augeas_obj->get($aug_p);
         next unless defined $v;
 
-        $logger->debug("read-augeas $aug_p, will set C::M path $cm_p with $v");
+        $logger->debug("read-augeas $aug_p, will set C::M path '$cm_p' with '$v'");
 
         $cm_p =~ s!^/!!;
 
@@ -321,15 +321,24 @@ sub read {
             }
 
             # augeas list begin at 1 not 0
+            my $type = $obj->get_type ;
             $label -= 1 if $obj->get_type eq 'list';
             if ( scalar @cm_steps > 0 ) {
                 $logger->debug("read-augeas: get $label");
                 $obj = $obj->get($label);
             }
+            elsif ($type eq 'check_list') {
+                $logger->debug("read-augeas: set check_list $label $v");
+                $obj->check( $v );
+            }
+            elsif ($type eq 'leaf') {
+                $logger->debug("read-augeas: set leaf $label $v");
+                $obj->store( $v );
+            }
             else {
                 # last step
-                $logger->debug("read-augeas: set $label $v");
-                $obj->set( $label, $v );
+                $logger->debug("read-augeas: set $type $label $v");
+                $obj->set( $label , $v );
             }
 
             if ( not defined $obj ) {
