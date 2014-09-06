@@ -232,7 +232,7 @@ splice @mod, 8,0,"Protocol 1,2\n";
 $mod[15] = "Subsystem            ddftp /home/dd/bin/ddftp\n";
 
 open(AUG,$aug_sshd_file) || die "Can't open $aug_sshd_file:$!"; 
-is_deeply([<AUG>],\@mod,"check content of $aug_sshd_file") ;
+eq_or_diff([<AUG>],\@mod,"check content of $aug_sshd_file") ;
 close AUG;
 
 $sshd_root->load("Match~1") ;
@@ -262,7 +262,9 @@ push @mod,"Match User sarko Group pres.*\n","Banner /etc/bienvenue2.txt\n";
 
 
 open(AUG,$aug_sshd_file) || die "Can't open $aug_sshd_file:$!"; 
-is_deeply([<AUG>],\@mod,"check content of $aug_sshd_file after Match:2 ...") ;
+my @got =  <AUG> ;
+map {s/^[\t ]+//;} @got;
+eq_or_diff(\@got,\@mod,"check content of $aug_sshd_file after Match:2 ...") ;
 close AUG;
 
 $sshd_root->load("Match:2 Condition User=sarko Group=pres.* -
@@ -275,7 +277,9 @@ print "mod--\n",map { $i++ . ': '. $_} @mod,"---\n" if $trace ;
 splice @mod,38,0,"AllowTcpForwarding yes\n";
 
 open(AUG,$aug_sshd_file) || die "Can't open $aug_sshd_file:$!"; 
-is_deeply([<AUG>],\@mod,"check content of $aug_sshd_file after Match:2 AllowTcpForwarding=yes") ;
+@got =  <AUG> ;
+map {s/^[\t ]+//;} @got;
+eq_or_diff( \@got,\@mod,"check content of $aug_sshd_file after Match:2 AllowTcpForwarding=yes") ;
 close AUG;
 
 
