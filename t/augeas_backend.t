@@ -15,6 +15,7 @@ use Config::Model;
 use File::Path;
 use File::Copy ;
 use version 0.77 ;
+use Log::Log4perl qw(:easy :levels);
 
 use warnings;
 no warnings qw(once);
@@ -23,17 +24,25 @@ use strict;
 
 use vars qw/$model/;
 
-$model = Config::Model -> new (legacy => 'ignore',) ;
-
 my $arg = shift || '';
+my ( $trace, $log, $show ) = (0) x 3;
 
-my $trace = $arg =~ /t/ ? 1 : 0 ;
-$::verbose          = 1 if $arg =~ /v/;
-$::debug            = 1 if $arg =~ /d/;
+$log  = 1  if $arg =~ /l/;
+$show = 1  if $arg =~ /s/;
+$trace = 1 if $arg =~ /t/ ;
 Config::Model::Exception::Any->Trace(1) if $arg =~ /e/;
 
-use Log::Log4perl qw(:easy) ;
-Log::Log4perl->easy_init($arg =~ /l/ ? $TRACE: $WARN);
+my $home = $ENV{HOME} || "";
+my $log4perl_user_conf_file = "$home/.log4config-model";
+
+if ( $log and -e $log4perl_user_conf_file ) {
+    Log::Log4perl::init($log4perl_user_conf_file);
+}
+else {
+    Log::Log4perl->easy_init( $log ? $WARN : $ERROR );
+}
+
+$model = Config::Model -> new (legacy => 'ignore',) ;
 
 eval { require Config::Augeas ;} ;
 if ( $@ ) {
