@@ -1,3 +1,8 @@
+2014-09-06  Dominique Dumont  <domi.dumont@free.fr> v0.118
+
+    * use empty step arg when call set on a checklist
+      (Closes Debian #759965)
+
 2014-06-19  Dominique Dumont  <domi.dumont@free.fr> v0.117
 
     * experience config attribute is deprecated
