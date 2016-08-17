@@ -5,7 +5,8 @@
 # workaround Augeas locale bug
 if (not defined $ENV{LC_ALL} or $ENV{LC_ALL} ne 'C' or $ENV{LANG} ne 'C') {
   $ENV{LC_ALL} = $ENV{LANG} = 'C';
-  exec("perl $0 @ARGV");
+  # use the Perl interpreter that ran this script. See RT #116750
+  exec("$^X $0 @ARGV");
 }
 
 use ExtUtils::testlib;
@@ -145,7 +146,7 @@ my $aug_version = $have_pkg_config ? `pkg-config --modversion augeas` : '' ;
 chomp $aug_version ;
 
 my $skip =  (not $have_pkg_config)  ? 'pkgconfig is not installed'
-         :  version->parse($aug_version) le version->parse('0.3.1') ? 'Need Augeas library > 0.3.1'
+         :  version->parse($aug_version) le version->parse('0.3.1') ? 'Need Augeas development library > 0.3.1'
          :                            '';
 
 SKIP: {

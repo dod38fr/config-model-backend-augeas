@@ -19,7 +19,8 @@ use vars qw/$model/;
 # workaround Augeas locale bug
 if (not defined $ENV{LC_ALL} or $ENV{LC_ALL} ne 'C' or $ENV{LANG} ne 'C') {
   $ENV{LC_ALL} = $ENV{LANG} = 'C';
-  exec("perl $0 @ARGV");
+  # use the Perl interpreter that ran this script. See RT #116750
+  exec("$^X $0 @ARGV");
 }
 
 my $arg = shift || '';
