@@ -61,7 +61,10 @@ ok($meta_inst,"Loaded Itself::Model") ;
 
 my $meta_root = $meta_inst->config_root ;
 
-my %ssh_model;
+my %ssh_model ;
+
+# avoid unordered hash warning
+$ssh_model{class}{__order} = ['MasterModel::SshdWithAugeas'];
 
 $ssh_model{class}{'MasterModel::SshdWithAugeas'} = {
 
