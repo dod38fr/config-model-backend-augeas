@@ -1,6 +1,6 @@
 [
     [
-        name => "Itself::ConfigWR",
+        name => "Itself::ConfigReadWrite",
 
         'element' => [
 
