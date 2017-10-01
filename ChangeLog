@@ -1,3 +1,10 @@
+2017-10-01  Dominique Dumont  <domi.dumont@free.fr> v0.121
+
+   * changed test backend specification to use rw_config instead of
+     read_config following the deprecation done in Config::Model 2.111
+   * Renamed meta model extension to follow the changes done in
+     Config::Model::Itself 2.012
+
 2017-05-14  Dominique Dumont  <domi.dumont@free.fr> v0.120
 
    * tweak test to cope with '.' removal from @INC
