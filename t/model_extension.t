@@ -65,19 +65,12 @@ my %ssh_model;
 
 $ssh_model{class}{'MasterModel::SshdWithAugeas'} = {
 
-        'read_config' => [
-            {
-                backend         => 'Augeas',
-                config_dir      => '/etc/ssh',
-                file            => 'sshd_config',
-                sequential_lens => [qw/HostKey Subsystem Match/],
-            },
-            {
-                backend     => 'perl_file',
-                config_dir  => '/etc/ssh',
-                auto_create => 1,
-            },
-        ],
+        'rw_config' => {
+            backend         => 'Augeas',
+            # commentnfig_dir      => '/etc/ssh',
+            file            => 'sshd_config',
+            sequential_lens => [qw/HostKey Subsystem Match/],
+        },
 
         element => [
             'AcceptEnv',
@@ -121,7 +114,7 @@ print $meta_root->dump_tree if $trace;
 
 # kind of not necessary since load_data aboce will fail if the model extension is
 # not loaded
-my $backend = $meta_root->grab("class:MasterModel::SshdWithAugeas read_config:0 backend") ;
+my $backend = $meta_root->grab("class:MasterModel::SshdWithAugeas rw_config backend") ;
 like(
     join( ',', $backend->get_choice),
     qr/Augeas/,
