@@ -19,16 +19,9 @@ use Test::More ;
 use ExtUtils::testlib;
 use Log::Log4perl qw(:easy :levels) ;
 use Config::Model ;
+use Config::Model::Itself 2.012;
 
 no warnings qw(once);
-
-eval { require Config::Model::Itself ;} ;
-if ( $@ ) {
-    plan skip_all => 'Config::Model::Itself is not installed';
-}
-else {
-    plan tests => 3;
-}
 
 my $arg = shift || '';
 my ($log,$show) = (0) x 2 ;
@@ -124,3 +117,4 @@ like(
     "test that augeas backend is part of backend choice"
 ) ;
 
+done_testing();
