@@ -35,7 +35,6 @@ my $build = Module::Build->new
    configure_requires => { 'Module::Build' => '0.36' },
    requires       => {
 		      'Log::Log4perl'     => '1.11', # for TRACE log level
-		      'Exception::Class'  => 0,
 		      'Config::Augeas'    => '0.303',
 		      'Config::Model'     => '2.111',
 		      'Mouse'             => 0,
