@@ -1,9 +1,10 @@
 # test model used by t/*.t
 
 package LoadTest;
-use Exporter;
+require Exporter;
 
-@EXPORT = qw/load_test_model/;
+our @ISA = qw/Exporter/;
+our @EXPORT = qw/load_test_model/;
 
 sub load_test_model {
     my $model = shift ;
