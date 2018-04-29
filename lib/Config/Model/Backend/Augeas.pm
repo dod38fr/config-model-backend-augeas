@@ -37,8 +37,6 @@ our $VERSION = '0.124';
 
 my $logger = get_logger('Backend::Augeas');
 
-sub suffix { return ''; }
-
 =head1 NAME
 
 Config::Model::Backend::Augeas - Read and write config data through Augeas
