@@ -752,15 +752,15 @@ http://augeas.net/ : Augeas project page
 
 =item *
 
-L<Config::Model> 
+config-model wiki: L<http://github.com/dod38fr/config-model/wiki>
+
+=item *
+
+Blogs about this project: L<https://ddumont.wordpress.com/category/perl/configmodel/>
 
 =item *
 
 Augeas mailing list: http://augeas.net/developers.html
-
-=item *
-
-Config::Model mailing list : http://sourceforge.net/mail/?group_id=155650
 
 =back
 
