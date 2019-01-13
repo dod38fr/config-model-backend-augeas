@@ -22,8 +22,6 @@ if (not defined $ENV{LC_ALL} or $ENV{LC_ALL} ne 'C' or $ENV{LANG} ne 'C') {
   exec("$^X $0 @ARGV");
 }
 
-my ($model, $trace) = init_test();
-
 eval { require Config::Augeas ;} ;
 if ( $@ ) {
     plan skip_all => 'Config::Augeas is not installed';
@@ -31,6 +29,8 @@ if ( $@ ) {
 else {
     plan tests => 4;
 }
+
+my ($model, $trace) = init_test();
 
 # pseudo root where config files are written by config-model
 my $wr_root = setup_test_dir;

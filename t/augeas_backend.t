@@ -23,8 +23,6 @@ use LoadTest;
 use warnings;
 use strict;
 
-my ($model, $trace) = init_test();
-
 eval { require Config::Augeas ;} ;
 if ( $@ ) {
     plan skip_all => 'Config::Augeas is not installed';
@@ -32,6 +30,8 @@ if ( $@ ) {
 else {
     plan tests => 18;
 }
+
+my ($model, $trace) = init_test();
 
 # pseudo root were input config file are read
 my $r_root = path('augeas-box');
