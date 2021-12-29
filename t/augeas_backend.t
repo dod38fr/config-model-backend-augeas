@@ -149,12 +149,10 @@ SKIP: {
     #my @aug_content = $ssh_augeas_obj->match("/files/etc/ssh/sshd_config/*") ;
     #print join("\n",@aug_content) ;
 
-    my $assign = $Config::Model::VERSION >= 2.052 ? ':=' : ':' ;
-
-    $expect = qq(AcceptEnv${assign}LC_PAPER,LC_NAME,LC_ADDRESS,LC_TELEPHONE,LC_MEASUREMENT,LC_IDENTIFICATION,LC_ALL
-AllowUsers${assign}foo,"bar\@192.168.0.*"
+    $expect = qq(AcceptEnv:=LC_PAPER,LC_NAME,LC_ADDRESS,LC_TELEPHONE,LC_MEASUREMENT,LC_IDENTIFICATION,LC_ALL
+AllowUsers:=foo,"bar\@192.168.0.*"
 HostbasedAuthentication=no
-HostKey${assign}/etc/ssh/ssh_host_key,/etc/ssh/ssh_host_rsa_key,/etc/ssh/ssh_host_dsa_key
+HostKey:=/etc/ssh/ssh_host_key,/etc/ssh/ssh_host_rsa_key,/etc/ssh/ssh_host_dsa_key
 Subsystem:rftp=/usr/lib/openssh/rftp-server
 Subsystem:sftp=/usr/lib/openssh/sftp-server
 Subsystem:tftp=/usr/lib/openssh/tftp-server
