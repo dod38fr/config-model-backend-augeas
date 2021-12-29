@@ -251,11 +251,11 @@ sub read {
     # the model. I.e if the file "root" matches a list element (like
     # for /etc/hosts), get this element name from "set_in" parameter
     my $set_in = $args{set_in} || '';
-    map {
-        s!$mainpath!!;
-        $_ = "/$set_in/$_" if $set_in;
-        s!/+!/!g;
-    } @cm_path;
+    foreach my $path (@cm_path) {
+        $path =~ s!$mainpath!!;
+        $path = "/$set_in/$path" if $set_in;
+        $path  =~ s!/+!/!g;
+    }
 
     # Create a hash of sequential lenses
     my %is_seq_lens = map { ( $_ => 1 ); } @{ $args{sequential_lens} || [] };
@@ -501,7 +501,9 @@ sub list_element_cb {
         # fail. But Augeas does return foo/1 if only one element is
         # present in the tree :-/
         my $replace = $element_name . '[1]';
-        map { s/$element_name(?!\[)/$replace/ } @matches;
+        foreach (@matches) {
+            s/$element_name(?!\[)/$replace/;
+        }
     }
 
     my $logger = get_logger("Data::Write");
@@ -585,7 +587,9 @@ sub hash_element_cb {
     # the tree :-/
     if ($is_seq) {
         my $replace = $element_name . '[1]';
-        map { s/$element_name(?!\[)/$replace/ } @matches;
+        foreach (@matches) {
+            s/$element_name(?!\[)/$replace/;
+        }
     }
 
     my $logger = get_logger('Data::Write');
@@ -666,7 +670,9 @@ sub node_content_cb {
 
         # cleanup indexes are we don't handle them now with element
         # (later in lists and hashes)
-        map { s/\[\d+\]+$//; } @matches;
+        foreach (@matches) {
+            s/\[\d+\]+$//;
+        }
         $logger->debug( "copy_in_augeas: Node path $p matches:\n\t" . join( "\n\t", @matches ), );
 
         # store elements found in Augeas and their corresponding path
