@@ -1,5 +1,8 @@
 # -*- cperl -*-
 
+use warnings;
+use strict;
+
 # test augeas backend 
 
 # workaround Augeas locale bug
@@ -19,9 +22,6 @@ use version 0.77 ;
 
 use lib 't/lib';
 use LoadTest;
-
-use warnings;
-use strict;
 
 eval { require Config::Augeas ;} ;
 if ( $@ ) {
@@ -231,7 +231,7 @@ Ciphers=arcfour256,aes192-cbc,aes192-ctr,aes256-cbc,aes256-ctr -
 
     push @mod,"Match User sarko Group pres.*\n","Banner /etc/bienvenue2.txt\n";
 
-    my @got = map {s/^[\t ]+//; $_; } $sshd_config->lines;
+    my @got = map {my $t=$_; $t =~ s/^[\t ]+//; $t; } $sshd_config->lines;
     eq_or_diff(\@got,\@mod,"check content of $sshd_config after Match:2 ...") ;
 
     $sshd_root->load("Match:2 Condition User=sarko Group=pres.* -
@@ -243,7 +243,7 @@ Ciphers=arcfour256,aes192-cbc,aes192-ctr,aes256-cbc,aes256-ctr -
     print "mod--\n",map { $i++ . ': '. $_} @mod,"---\n" if $trace ;
     splice @mod,37,0,"AllowTcpForwarding yes\n";
 
-    @got = map {s/^[\t ]+//; $_; } $sshd_config->lines;
+    @got = map {my $t=$_; $t =~ s/^[\t ]+//; $t; } $sshd_config->lines;
     eq_or_diff( \@got,\@mod,"check content of $sshd_config after Match:2 AllowTcpForwarding=yes") ;
 
 } # end SKIP section
