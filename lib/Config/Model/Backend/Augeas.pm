@@ -67,7 +67,7 @@ Config::Model::Backend::Augeas - Read and write config data through Augeas
 
 This class provides a way to load or store configuration data through
 L<Config::Augeas>. This way, the structure and comments of the
-original configuration file will preserved.
+original configuration file are preserved.
 
 To use Augeas as a backend, you must specify the following
 C<read_config> parameters:
@@ -151,8 +151,9 @@ Augeas will have this tree:
  /files/etc/ssh/sshd_config/AcceptEnv[2]/4
  /files/etc/ssh/sshd_config/AcceptEnv[2]/5
 
-Note that the first index between squarekeeps track of how are grouped
-the C<AcceptEnv> data, but the I<real> list index is after the slash.
+Note that the first index between square brackets keeps track of how
+the C<AcceptEnv> items are grouped, but the I<real> list index is
+after the slash.
 
 Augeas does not require new elements to create C<AcceptEnv[3]>. A new
 element can be added as :
