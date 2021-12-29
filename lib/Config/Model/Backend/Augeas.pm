@@ -47,18 +47,14 @@ Config::Model::Backend::Augeas - Read and write config data through Augeas
   {
    config_class_name => 'OpenSsh::Sshd',
 
-   # try Augeas and fall-back with custom method
-   read_config  => [ { backend => 'augeas' , 
-                       file => '/etc/ssh/sshd_config',
-                       # declare "seq" Augeas elements 
-                       sequential_lens => [/AcceptEnv AllowGroups [etc]/],
-                     },
-                     { backend => 'custom' , # dir hardcoded in custom class
-                       class => 'Config::Model::Sshd' 
-                     }
-                   ],
-   # write_config will be written using read_config specifications
+   read_config  => {
+      backend => 'augeas' ,
+      file => '/etc/ssh/sshd_config',
+      # declare "seq" Augeas elements
+      sequential_lens => [/AcceptEnv AllowGroups [etc]/],
+   },
 
+   # config is written back using read_config specifications
 
    element => ...
   }
@@ -97,14 +93,13 @@ for details.
 
 For instance:
 
-   read_config  => [ { backend => 'augeas' , 
-                       save   => 'backup',
-                       file => '/etc/ssh/sshd_config',
-                       # declare "seq" Augeas elements 
-                       sequential_lens => [/AcceptEnv AllowGroups/],
-                     },
-                   ],
-
+   read_config  => {
+       backend => 'augeas' ,
+       save   => 'backup',
+       file => '/etc/ssh/sshd_config',
+       # declare "seq" Augeas elements
+       sequential_lens => [/AcceptEnv AllowGroups/],
+    },
 
 =head2 Sequential lens
 
