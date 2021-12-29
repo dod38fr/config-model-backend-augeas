@@ -33,7 +33,7 @@ my $has_augeas = 1;
 eval { require Config::Augeas; };
 $has_augeas = 0 if $@;
 
-our $VERSION = '0.125';
+our $VERSION = '0.126';
 
 my $logger = get_logger('Backend::Augeas');
 
