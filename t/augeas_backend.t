@@ -221,6 +221,13 @@ Ciphers=arcfour256,aes192-cbc,aes192-ctr,aes256-cbc,aes256-ctr -
     splice @mod, 32,2, @lines ;
     pop @mod ;
 
+    my $sarko = "Match User sarko Group pres.*\n";
+    if (version->parse($aug_version) ge version->parse('1.13.0')) {
+        # tweak quotes added by augeas since version 1.13.0
+        $mod[32] =~ s/(white.house.\*)/"$1"/;
+        $sarko =~ s/(sarko|pres.\*)/"$1"/g;
+    }
+
     is_deeply([$sshd_config->lines],\@mod,"check content of $sshd_config after Match~1") ;
 
     $sshd_root->load("Match:2 Condition User=sarko Group=pres.* -
@@ -229,7 +236,7 @@ Ciphers=arcfour256,aes192-cbc,aes192-ctr,aes256-cbc,aes256-ctr -
     $i_sshd->write_back ;
 
 
-    push @mod,"Match User sarko Group pres.*\n","Banner /etc/bienvenue2.txt\n";
+    push @mod, $sarko, "Banner /etc/bienvenue2.txt\n";
 
     my @got = map {my $t=$_; $t =~ s/^[\t ]+//; $t; } $sshd_config->lines;
     eq_or_diff(\@got,\@mod,"check content of $sshd_config after Match:2 ...") ;
